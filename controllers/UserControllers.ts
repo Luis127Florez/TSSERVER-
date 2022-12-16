@@ -22,8 +22,6 @@ export const GetUserById = async (req: Request, res: Response) => {
 }
 export const PahtUserByEmail = async(req : Request , res: Response)=>{
     const { body } = req
-
-
     try {
         const user = await users.findOne({
             where:{

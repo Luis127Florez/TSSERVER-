@@ -3,8 +3,8 @@ import cors from 'cors';
 import UserRoutes from "../routes/UserRoutes";
 import solicitudRouter from '../routes/SolicitudesRoutes';
 import unionU_S from '../routes/UnionRouters';
+import index from '../routes/indexRouter';
 import db from '../db/connection';
-
 
 class Server {
     private App: Application;
@@ -12,7 +12,8 @@ class Server {
     private apiPath = {
         usuarios:'/api/users',
         solicitudes:'/api/solicitudes',
-        unionU_S:'/api/unionU_S'
+        unionU_S:'/api/unionU_S',
+        index:'/api/index' 
     };
 
     constructor() {
@@ -41,6 +42,8 @@ class Server {
         this.App.use(this.apiPath.usuarios, UserRoutes);
         this.App.use(this.apiPath.solicitudes,  solicitudRouter);
         this.App.use(this.apiPath.unionU_S,  unionU_S);
+        this.App.use(this.apiPath.index,  index);
+        
     };
 
     listen(){

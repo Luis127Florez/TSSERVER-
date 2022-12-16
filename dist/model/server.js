@@ -17,13 +17,15 @@ const cors_1 = __importDefault(require("cors"));
 const UserRoutes_1 = __importDefault(require("../routes/UserRoutes"));
 const SolicitudesRoutes_1 = __importDefault(require("../routes/SolicitudesRoutes"));
 const UnionRouters_1 = __importDefault(require("../routes/UnionRouters"));
+const indexRouter_1 = __importDefault(require("../routes/indexRouter"));
 const connection_1 = __importDefault(require("../db/connection"));
 class Server {
     constructor() {
         this.apiPath = {
             usuarios: '/api/users',
             solicitudes: '/api/solicitudes',
-            unionU_S: '/api/unionU_S'
+            unionU_S: '/api/unionU_S',
+            index: '/api/index'
         };
         this.App = (0, express_1.default)();
         this.port = process.env.PORT || '8000';
@@ -53,6 +55,7 @@ class Server {
         this.App.use(this.apiPath.usuarios, UserRoutes_1.default);
         this.App.use(this.apiPath.solicitudes, SolicitudesRoutes_1.default);
         this.App.use(this.apiPath.unionU_S, UnionRouters_1.default);
+        this.App.use(this.apiPath.index, indexRouter_1.default);
     }
     ;
     listen() {
