@@ -1,4 +1,4 @@
-import express, {Application} from 'express';
+import express, { Application } from 'express';
 import cors from 'cors';
 import UserRoutes from "../routes/UserRoutes";
 import solicitudRouter from '../routes/SolicitudesRoutes';
@@ -10,10 +10,10 @@ class Server {
     private App: Application;
     private port: string;
     private apiPath = {
-        usuarios:'/api/users',
-        solicitudes:'/api/solicitudes',
-        unionU_S:'/api/unionU_S',
-        index:'/api/index' 
+        usuarios: '/api/users',
+        solicitudes: '/api/solicitudes',
+        unionU_S: '/api/unionU_S',
+        index: '/api/index'
     };
 
     constructor() {
@@ -24,32 +24,34 @@ class Server {
         this.router();
     };
 
-    middelwares(){
+    middelwares() {
         this.App.use(cors());
         this.App.use(express.json());
         this.App.use(express.static('public'));
+        this.App.use(express.urlencoded({ extended: true }));
+        this.App.use(express.urlencoded());
     };
 
-    async connection(){
+    async connection() {
         try {
             await db.authenticate();
             console.log('Connection has been established successfully.');
-          } catch (error) {
+        } catch (error) {
             console.error('Unable to connect to the database:', error);
-          }
+        }
     }
-    router(){ 
+    router() {
         this.App.use(this.apiPath.usuarios, UserRoutes);
-        this.App.use(this.apiPath.solicitudes,  solicitudRouter);
-        this.App.use(this.apiPath.unionU_S,  unionU_S);
-        this.App.use(this.apiPath.index,  index);
-        
+        this.App.use(this.apiPath.solicitudes, solicitudRouter);
+        this.App.use(this.apiPath.unionU_S, unionU_S);
+        this.App.use(this.apiPath.index, index);
+
     };
 
-    listen(){
-        this.App.listen(this.port , ()=>{
+    listen() {
+        this.App.listen(this.port, () => {
             console.log(`el puesto esta corriendo ${this.port}`);
-            
+
         });
     };
 };

@@ -18,7 +18,7 @@ export const GetSoliciudById = async (req: Request, res: Response) => {
 
 export const PostSolicitud = async (req: Request, res: Response) => {
     const { body } = req
-    const solicitud = new solicitudes(body)
+    const solicitud = new solicitudes(body)  
     await solicitud.save();
     res.json(solicitud)
 }

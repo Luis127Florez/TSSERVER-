@@ -38,6 +38,8 @@ class Server {
         this.App.use((0, cors_1.default)());
         this.App.use(express_1.default.json());
         this.App.use(express_1.default.static('public'));
+        this.App.use(express_1.default.urlencoded({ extended: true }));
+        this.App.use(express_1.default.urlencoded());
     }
     ;
     connection() {
