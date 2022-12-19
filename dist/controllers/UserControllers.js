@@ -40,7 +40,7 @@ const PahtUserByEmail = (req, res) => __awaiter(void 0, void 0, void 0, function
                 email: body.email
             }
         });
-        res.json(user);
+        res.json([user]);
     }
     catch (error) {
         console.log(error);

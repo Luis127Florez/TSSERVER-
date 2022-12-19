@@ -6,7 +6,7 @@ const GetIndex = (req, res) => {
 };
 exports.GetIndex = GetIndex;
 const PostIndex = (req, res) => {
-    console.log(req.files);
+    console.log(req);
     res.send("upload...");
 };
 exports.PostIndex = PostIndex;

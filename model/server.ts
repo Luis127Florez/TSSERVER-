@@ -5,6 +5,7 @@ import solicitudRouter from '../routes/SolicitudesRoutes';
 import unionU_S from '../routes/UnionRouters';
 import index from '../routes/indexRouter';
 import db from '../db/connection';
+/* import  fileUpload from 'express-fileupload'; */
 
 class Server {
     private App: Application;
@@ -30,6 +31,10 @@ class Server {
         this.App.use(express.static('public'));
         this.App.use(express.urlencoded({ extended: true }));
         this.App.use(express.urlencoded());
+       /*  this.App.use(fileUpload({
+            useTempFiles : true,
+            tempFileDir : '/tmp/'
+        })); */
     };
 
     async connection() {
