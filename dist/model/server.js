@@ -19,7 +19,7 @@ const SolicitudesRoutes_1 = __importDefault(require("../routes/SolicitudesRoutes
 const UnionRouters_1 = __importDefault(require("../routes/UnionRouters"));
 const indexRouter_1 = __importDefault(require("../routes/indexRouter"));
 const connection_1 = __importDefault(require("../db/connection"));
-/* import  fileUpload from 'express-fileupload'; */
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 class Server {
     constructor() {
         this.apiPath = {
@@ -41,10 +41,11 @@ class Server {
         this.App.use(express_1.default.static('public'));
         this.App.use(express_1.default.urlencoded({ extended: true }));
         this.App.use(express_1.default.urlencoded());
-        /*  this.App.use(fileUpload({
-             useTempFiles : true,
-             tempFileDir : '/tmp/'
-         })); */
+        this.App.use((0, express_fileupload_1.default)({
+            useTempFiles: true,
+            tempFileDir: '/tmp/',
+            debug: true
+        }));
     }
     ;
     connection() {
