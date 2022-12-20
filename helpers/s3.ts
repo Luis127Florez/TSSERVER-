@@ -14,7 +14,7 @@ const almacen = new s3({
 });
 
 export const GetBuckets = (filename : string) => {
-    return almacen.getSignedUrl('getObject', { Bucket: "btfundacionet", Key: filename });
+    return almacen.getSignedUrl('getObject', { Bucket: "escuelitaet", Key: filename });
 };
 
 export const Postarchivo = async (Bucketsname: any, file: any) => {

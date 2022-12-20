@@ -105,14 +105,14 @@ ________________________________________________________________________________
 retorna todas la solicitudes y los usuarios de forma unificada
 
 
-________________________________________________________NO  USAR __NO ESTAN LISTAS___
+_______________________________________________________________________________
 
-15.	http://localhost:8000/api/index
+15.	http://localhost:8000/api/index/iduser
 Type :get 
-Obtiene un archivo
+Obtiene un link donde puedes descargar el archivo
 
 
-16.	http://localhost:8000/api/index
+16.	http://localhost:8000/api/index/iduser
 type: post
-guarda un archivo
+guarda un archivo requiere un archivo en el fromdata
 

@@ -26,7 +26,7 @@ const almacen = new s3_1.default({
     secretAccessKey,
 });
 const GetBuckets = (filename) => {
-    return almacen.getSignedUrl('getObject', { Bucket: "btfundacionet", Key: filename });
+    return almacen.getSignedUrl('getObject', { Bucket: "escuelitaet", Key: filename });
 };
 exports.GetBuckets = GetBuckets;
 const Postarchivo = (Bucketsname, file) => __awaiter(void 0, void 0, void 0, function* () {
