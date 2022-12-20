@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetUnionU_S = exports.DeleteSolicitud = exports.PutSolicitud = exports.PostSolicitud = exports.GetSoliciudById = exports.GetSolicitud = void 0;
+exports.GetSoliciudByIduser = exports.GetUnionU_S = exports.DeleteSolicitud = exports.PutSolicitud = exports.PostSolicitud = exports.GetSoliciudById = exports.GetSolicitud = void 0;
 const solicitudesModel_1 = __importDefault(require("../model/solicitudesModel"));
 const UserModel_1 = __importDefault(require("../model/UserModel"));
 const GetSolicitud = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -81,4 +81,21 @@ const GetUnionU_S = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.GetUnionU_S = GetUnionU_S;
+const GetSoliciudByIduser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { iduser } = req.params;
+    try {
+        const solicitud = yield solicitudesModel_1.default.findAll({
+            where: {
+                iduser: iduser
+            }
+        });
+        res.json(solicitud);
+        console.log(solicitud);
+    }
+    catch (error) {
+        res.status(500).json("hable con el admin");
+        console.log(error);
+    }
+});
+exports.GetSoliciudByIduser = GetSoliciudByIduser;
 //# sourceMappingURL=solicitudesControllers.js.map

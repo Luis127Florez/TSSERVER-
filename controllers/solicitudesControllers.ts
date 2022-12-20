@@ -73,3 +73,23 @@ export const GetUnionU_S = async (req: Request, res: Response) => {
     }
 
 }
+export const GetSoliciudByIduser = async(req: Request , res: Response)=>{
+    const {iduser} = req.params
+    
+    try{
+        const solicitud = await solicitudes.findAll({
+            where:{
+                iduser: iduser
+            }
+        })
+        
+        res.json(solicitud)
+        console.log(solicitud)
+        
+    } catch( error ){
+        res.status(500).json("hable con el admin")
+        console.log(error)
+        
+    }
+
+}

@@ -13,6 +13,9 @@ exports.PostIndex = exports.GetIndex = void 0;
 const s3_1 = require("../helpers/s3");
 const GetIndex = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const data = yield (0, s3_1.GetBuckets)();
+    /* res.render('index',{
+        buckets:data.Buckets
+    }); */
     console.log(data);
 });
 exports.GetIndex = GetIndex;

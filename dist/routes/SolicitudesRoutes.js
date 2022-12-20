@@ -5,6 +5,7 @@ const solicitudesControllers_1 = require("../controllers/solicitudesControllers"
 const routerSolicitud = (0, express_1.Router)();
 routerSolicitud.get('/', solicitudesControllers_1.GetSolicitud);
 routerSolicitud.get('/:id', solicitudesControllers_1.GetSoliciudById);
+routerSolicitud.patch('/:iduser', solicitudesControllers_1.GetSoliciudByIduser);
 routerSolicitud.post('/', solicitudesControllers_1.PostSolicitud);
 routerSolicitud.put('/:id', solicitudesControllers_1.PutSolicitud);
 routerSolicitud.delete('/:id', solicitudesControllers_1.DeleteSolicitud);
