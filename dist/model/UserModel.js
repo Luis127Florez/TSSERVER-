@@ -43,6 +43,9 @@ const user = connection_1.default.define('users', {
     },
     Contraseña: {
         type: sequelize_1.DataTypes.STRING
+    },
+    img: {
+        type: sequelize_1.DataTypes.STRING
     }
 });
 exports.default = user;

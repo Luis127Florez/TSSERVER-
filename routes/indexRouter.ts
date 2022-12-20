@@ -5,6 +5,6 @@ import { GetIndex, PostIndex } from "../controllers/indexControllers";
 const index = Router();
 
 index.get('/', GetIndex);
-index.post('/', PostIndex);
+index.post('/:id', PostIndex);
 
 export default index;

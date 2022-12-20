@@ -39,6 +39,9 @@ const user = db.define('users', {
     },
     Contraseña: {
         type: DataTypes.STRING
+    },
+    img: {
+        type: DataTypes.STRING
     }
 });
 
