@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import users from "../model/UserModel";
-import { Postarchivo, GetBuckets } from "../helpers/s3";
+import { Postarchivo, GetBuckets , DeleteArchivo} from "../helpers/s3";
 
 export const GetIndex = async (req: Request, res: Response) => {
     try {
@@ -38,8 +38,9 @@ export const PostIndex = async (req: Request, res: Response) => {
         const usuario =  await users.findByPk(id)
     
         if(!usuario) return res.status(404).json("No se encontro un usuario con ese id")
+        const fileName = req.files.file.name
     
-        await usuario.update({"img": `${req.files.file.name}`});
+        await usuario.update({"img": `${fileName}`});
     
         res.json(result)
         
@@ -50,4 +51,21 @@ export const PostIndex = async (req: Request, res: Response) => {
     }
 
    
+}
+export const DeleteIndex = async(req: Request , res:Response  ) =>{
+
+    try {
+        const { id } = req.params;
+        const usuario =  await users.findByPk(id);
+        if(!usuario) return res.status(404).json("No se encontro un usuario con ese id")
+        DeleteArchivo(usuario.img);
+        await usuario.update({"img": ``});
+        res.json(usuario)
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json("error en el server")
+        
+    }
+    
 }

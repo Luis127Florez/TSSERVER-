@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostIndex = exports.GetIndex = void 0;
+exports.DeleteIndex = exports.PostIndex = exports.GetIndex = void 0;
 const UserModel_1 = __importDefault(require("../model/UserModel"));
 const s3_1 = require("../helpers/s3");
 const GetIndex = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -44,7 +44,8 @@ const PostIndex = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const usuario = yield UserModel_1.default.findByPk(id);
         if (!usuario)
             return res.status(404).json("No se encontro un usuario con ese id");
-        yield usuario.update({ "img": `${req.files.file.name}` });
+        const fileName = req.files.file.name;
+        yield usuario.update({ "img": `${fileName}` });
         res.json(result);
     }
     catch (error) {
@@ -53,4 +54,20 @@ const PostIndex = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.PostIndex = PostIndex;
+const DeleteIndex = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const usuario = yield UserModel_1.default.findByPk(id);
+        if (!usuario)
+            return res.status(404).json("No se encontro un usuario con ese id");
+        (0, s3_1.DeleteArchivo)(usuario.img);
+        yield usuario.update({ "img": `` });
+        res.json(usuario);
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json("error en el server");
+    }
+});
+exports.DeleteIndex = DeleteIndex;
 //# sourceMappingURL=indexControllers.js.map

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.base64ToArrayBuffer = exports.toBase64 = exports.Postarchivo = exports.GetBuckets = void 0;
+exports.base64ToArrayBuffer = exports.toBase64 = exports.DeleteArchivo = exports.Postarchivo = exports.GetBuckets = void 0;
 const s3_1 = __importDefault(require("aws-sdk/clients/s3"));
 const fs_1 = __importDefault(require("fs"));
 const dotenv_1 = __importDefault(require("dotenv"));
@@ -30,7 +30,6 @@ const GetBuckets = (filename) => {
 };
 exports.GetBuckets = GetBuckets;
 const Postarchivo = (Bucketsname, file) => __awaiter(void 0, void 0, void 0, function* () {
-    // const stream = fs.createReadStream(file.tempFilePath);
     const stream = fs_1.default.createReadStream(file.tempFilePath);
     const params = {
         Bucket: Bucketsname,
@@ -46,6 +45,19 @@ const Postarchivo = (Bucketsname, file) => __awaiter(void 0, void 0, void 0, fun
     return almacen.upload(params).promise();
 });
 exports.Postarchivo = Postarchivo;
+const DeleteArchivo = (file) => {
+    var params = {
+        Bucket: "escuelitaet",
+        Key: file
+    };
+    almacen.deleteObject(params, function (err, data) {
+        if (err)
+            console.log(err, err.stack); // an error occurred
+        else
+            console.log(data); // successful response
+    });
+};
+exports.DeleteArchivo = DeleteArchivo;
 /**
  * Transforma un Tipo File a Base64 modo Async
  * @version 0.0.1
@@ -77,6 +89,7 @@ const base64ToArrayBuffer = (base64) => {
         for (let i = 0; i < len; i += 1) {
             bytes[i] = binaryString.charCodeAt(i);
         }
+        ;
         return bytes;
     }
     return false;

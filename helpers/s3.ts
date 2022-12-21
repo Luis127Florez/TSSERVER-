@@ -18,7 +18,7 @@ export const GetBuckets = (filename : string) => {
 };
 
 export const Postarchivo = async (Bucketsname: any, file: any) => {
-    // const stream = fs.createReadStream(file.tempFilePath);
+
     const stream = fs.createReadStream(file.tempFilePath);
     const params = {
         Bucket: Bucketsname,
@@ -33,6 +33,17 @@ export const Postarchivo = async (Bucketsname: any, file: any) => {
     }; */
     return almacen.upload(params).promise();
 };
+
+export const DeleteArchivo =(file: string)=>{
+    var params = {
+        Bucket: "escuelitaet", 
+        Key: file
+       };
+       almacen.deleteObject(params, function(err, data) {
+         if (err) console.log(err, err.stack); // an error occurred
+         else     console.log(data);           // successful response
+       });
+}
 
 
 /**
@@ -71,7 +82,7 @@ export const base64ToArrayBuffer = (
         const bytes = new Uint8Array(len);
         for (let i = 0; i < len; i += 1) {
             bytes[i] = binaryString.charCodeAt(i);
-        }
+        };
         return bytes;
     }
     return false;

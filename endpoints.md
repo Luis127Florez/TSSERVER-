@@ -116,3 +116,7 @@ Obtiene un link donde puedes descargar el archivo
 type: post
 guarda un archivo requiere un archivo en el fromdata
 
+17. http://localhost:8000/api/index/iduser
+type:delete
+elimina un archivo segun el id del user requiere id del usuario como parametro
+
