@@ -28,7 +28,23 @@ export const PahtUserByEmail = async(req : Request , res: Response)=>{
                 email: body.email
             } 
         })
-        res.json([user])
+        if (user) {
+            if (user.Contraseña !== body.Contraseña) return res.json(["pass not found"]);
+
+             const token =  jwt.sign({
+                id: user.idUser
+              }, 'milinode', { expiresIn: 86400 });
+
+            res.json({
+                email: user.email,
+                rol: user.rol,
+                token: token
+            })
+            
+        }else{
+            return res.json([user])
+        }
+        
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -58,7 +74,7 @@ export const PostUser = async (req: Request, res: Response) => {
             id: user.idUser
           }, 'milinode', { expiresIn: 86400 });
 
-        res.json(token)
+        res.json({token})
         
     } catch (error) {
         console.log(error);

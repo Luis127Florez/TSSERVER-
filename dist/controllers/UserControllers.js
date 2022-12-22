@@ -41,7 +41,21 @@ const PahtUserByEmail = (req, res) => __awaiter(void 0, void 0, void 0, function
                 email: body.email
             }
         });
-        res.json([user]);
+        if (user) {
+            if (user.Contraseña !== body.Contraseña)
+                return res.json(["pass not found"]);
+            const token = jsonwebtoken_1.default.sign({
+                id: user.idUser
+            }, 'milinode', { expiresIn: 86400 });
+            res.json({
+                email: user.email,
+                rol: user.rol,
+                token: token
+            });
+        }
+        else {
+            return res.json([user]);
+        }
     }
     catch (error) {
         console.log(error);
@@ -69,7 +83,7 @@ const PostUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const token = jsonwebtoken_1.default.sign({
             id: user.idUser
         }, 'milinode', { expiresIn: 86400 });
-        res.json(token);
+        res.json({ token });
     }
     catch (error) {
         console.log(error);
