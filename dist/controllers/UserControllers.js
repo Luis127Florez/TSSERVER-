@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DeleteUser = exports.PutUser = exports.PostUser = exports.PahtUserByEmail = exports.GetUserById = exports.GetUser = void 0;
 const UserModel_1 = __importDefault(require("../model/UserModel"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const GetUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield UserModel_1.default.findAll();
     res.json(user);
@@ -65,7 +66,10 @@ const PostUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             });
         }
         yield user.save();
-        res.json(user);
+        const token = jsonwebtoken_1.default.sign({
+            id: user.idUser
+        }, 'milinode', { expiresIn: 86400 });
+        res.json(token);
     }
     catch (error) {
         console.log(error);

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import users from "../model/UserModel";
-
+import jwt from "jsonwebtoken"
 
 
 export const GetUser = async (req: Request, res: Response) => {
@@ -52,8 +52,13 @@ export const PostUser = async (req: Request, res: Response) => {
                 msg: 'este email ya pertese a un user'
             })
         }
-        await user.save()
-        res.json(user)
+        await user.save();
+
+        const token = jwt.sign({
+            id: user.idUser
+          }, 'milinode', { expiresIn: 86400 });
+
+        res.json(token)
         
     } catch (error) {
         console.log(error);
