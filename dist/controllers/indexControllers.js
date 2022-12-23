@@ -24,7 +24,7 @@ const GetIndex = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 msg: 'No exite un usuario con el id ingresado'
             });
         }
-        const data = yield (0, s3_1.GetBuckets)(usuario.img);
+        const data = yield (0, s3_1.GetBuckets)(usuario.dataValues.img);
         res.json({ "link": data });
     }
     catch (error) {
@@ -60,7 +60,7 @@ const DeleteIndex = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const usuario = yield UserModel_1.default.findByPk(id);
         if (!usuario)
             return res.status(404).json("No se encontro un usuario con ese id");
-        (0, s3_1.DeleteArchivo)(usuario.img);
+        (0, s3_1.DeleteArchivo)(usuario.dataValues.img);
         yield usuario.update({ "img": `` });
         res.json(usuario);
     }

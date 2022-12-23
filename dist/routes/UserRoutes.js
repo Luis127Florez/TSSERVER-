@@ -5,6 +5,7 @@ const authJWT_1 = require("../helpers/authJWT");
 const UserControllers_1 = require("../controllers/UserControllers");
 const router = (0, express_1.Router)();
 router.get('/', authJWT_1.verificarTokenADMiN, UserControllers_1.GetUser);
+router.patch('/myself', authJWT_1.verificarToken, UserControllers_1.PatchMyself);
 router.get('/:id', authJWT_1.verificarTokenADMiN, UserControllers_1.GetUserById);
 router.patch('/', UserControllers_1.PahtUserByEmail);
 router.post('/', UserControllers_1.PostUser);

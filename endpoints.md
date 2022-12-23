@@ -20,7 +20,7 @@ guarda una solicitud requiere body
     "estado": true
 }
 
-4.	http://localhost:8000/api/solicitudes/idsolicitud
+4.	http://localhost:8000/api/solicitudes/${idsolicitud}
 type: put
 edita una solicitud requiere body con la nueva data 
 {
@@ -32,12 +32,12 @@ edita una solicitud requiere body con la nueva data
     "estado": true
 }
 
-5.	http://localhost:8000/api/solicitudes/idsolicitud
+5.	http://localhost:8000/api/solicitudes/${idsolicitud}
 type : delete
 
 elimina una solicitud
 
-6.	http://localhost:8000/api/solicitudes/iduser
+6.	http://localhost:8000/api/solicitudes/${iduser}
 type: patch
 
 obtiene todas las solicitudes de un usuario dependiendo el iduser
@@ -48,9 +48,16 @@ ____________________________________________________________________
 type: get
 retorna todos los usuarios existentes 
 
-8.	http://localhost:8000/api/users
+8.	http://localhost:8000/api/users/${iduser}
 type: get
 retorna un usuario en específico dependiendo el iduser enviado como parámetro 
+
+
+8.1 http://localhost:8000/api/users/myself
+type: patch
+retorna un usuario en específico dependiendo el token enviado como body
+
+
 
 9.	http://localhost:8000/api/users
 type: patch
@@ -77,7 +84,7 @@ guarda un usuario nuevo requiere un body con la data a ingresar
         "rol": "ADMIN",
         "Contraseña": "pedo2456"
     }
-11.	http://localhost:8000/api/users/iduser
+11.	http://localhost:8000/api/users/${iduser}
 type: put
 edita los datos de un usuario en específico dependiendo el iduser requiere un body con la data a actualizar
 
@@ -95,7 +102,7 @@ edita los datos de un usuario en específico dependiendo el iduser requiere un b
         "Contraseña": "pedo2456"
     }
 
-12.	http://localhost:8000/api/users/iduser
+12.	http://localhost:8000/api/users/${iduser}
 type :delete
 elimina un usuario dependiendo el iduser recibido como para metro 
 ____________________________________________________________________________________________________
@@ -107,16 +114,16 @@ retorna todas la solicitudes y los usuarios de forma unificada
 
 _______________________________________________________________________________
 
-15.	http://localhost:8000/api/index/iduser
+15.	http://localhost:8000/api/index/${iduser}
 Type :get 
 Obtiene un link donde puedes descargar el archivo
 
 
-16.	http://localhost:8000/api/index/iduser
+16.	http://localhost:8000/api/index/${iduser}
 type: post
 guarda un archivo requiere un archivo en el fromdata
 
-17. http://localhost:8000/api/index/iduser
+17. http://localhost:8000/api/index/${iduser}
 type:delete
 elimina un archivo segun el id del user requiere id del usuario como parametro
 

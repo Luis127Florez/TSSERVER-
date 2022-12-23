@@ -12,8 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DeleteUser = exports.PutUser = exports.PostUser = exports.PahtUserByEmail = exports.GetUserById = exports.GetUser = void 0;
+exports.PatchMyself = exports.DeleteUser = exports.PutUser = exports.PostUser = exports.PahtUserByEmail = exports.GetUserById = exports.GetUser = void 0;
 const UserModel_1 = __importDefault(require("../model/UserModel"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const GetUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield UserModel_1.default.findAll();
@@ -42,14 +43,16 @@ const PahtUserByEmail = (req, res) => __awaiter(void 0, void 0, void 0, function
             }
         });
         if (user) {
-            if (user.Contraseña !== body.Contraseña)
-                return res.json(null);
+            const hash = user.dataValues.Contraseña;
+            const passchek = bcryptjs_1.default.compareSync(`${body.Contraseña}`, hash);
+            if (!passchek)
+                return res.json("pass NOT iguales");
             const token = jsonwebtoken_1.default.sign({
-                id: user.idUser
+                id: user.dataValues.idUser
             }, 'milinode', { expiresIn: 86400 });
             res.json({
-                email: user.email,
-                rol: user.rol,
+                email: user.dataValues.email,
+                rol: user.dataValues.rol,
                 token: token
             });
         }
@@ -79,9 +82,12 @@ const PostUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 msg: 'este email ya pertese a un user'
             });
         }
+        const salt = bcryptjs_1.default.genSaltSync(10);
+        const hash = bcryptjs_1.default.hashSync(user.dataValues.Contraseña, salt);
+        user.dataValues.Contraseña = hash;
         yield user.save();
         const token = jsonwebtoken_1.default.sign({
-            id: user.idUser
+            id: user.dataValues.idUser
         }, 'milinode', { expiresIn: 86400 });
         res.json({ token });
     }
@@ -129,4 +135,18 @@ const DeleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     });
 });
 exports.DeleteUser = DeleteUser;
+const PatchMyself = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { token } = req.body;
+        const decode = jsonwebtoken_1.default.verify(token, "milinode");
+        const user = yield UserModel_1.default.findByPk(decode.id);
+        if (user)
+            return res.json(user);
+    }
+    catch (error) {
+        console.log(error);
+        res.status(404).json("Token erroneo");
+    }
+});
+exports.PatchMyself = PatchMyself;
 //# sourceMappingURL=UserControllers.js.map

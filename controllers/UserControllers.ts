@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import users from "../model/UserModel";
-import jwt from "jsonwebtoken"
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 
 export const GetUser = async (req: Request, res: Response) => {
@@ -29,15 +30,19 @@ export const PahtUserByEmail = async(req : Request , res: Response)=>{
             } 
         })
         if (user) {
-            if (user.Contraseña !== body.Contraseña) return res.json(null);
+            const hash:string = user.dataValues.Contraseña;
 
+            const passchek = bcrypt.compareSync(`${body.Contraseña}` , hash );
+            
+
+            if (!passchek) return res.json("pass NOT iguales");
              const token =  jwt.sign({
-                id: user.idUser
+                id: user.dataValues.idUser
               }, 'milinode', { expiresIn: 86400 });
 
             res.json({
-                email: user.email,
-                rol: user.rol,
+                email: user.dataValues.email,
+                rol: user.dataValues.rol,
                 token: token
             })
             
@@ -68,10 +73,16 @@ export const PostUser = async (req: Request, res: Response) => {
                 msg: 'este email ya pertese a un user'
             })
         }
-        await user.save();
+
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(user.dataValues.Contraseña, salt);
+
+        user.dataValues.Contraseña = hash;
+
+        await user.save(); 
 
         const token = jwt.sign({
-            id: user.idUser
+            id: user.dataValues.idUser
           }, 'milinode', { expiresIn: 86400 });
 
         res.json({token})
@@ -123,4 +134,18 @@ export const DeleteUser = async(req: Request, res: Response) => {
     res.json({
         msg: 'usuario eliminado'
     })
+}
+export const PatchMyself =  async ( req:Request , res:Response) =>{
+    try {
+        const { token } = req.body
+        const decode = jwt.verify(token, "milinode")
+        const user = await users.findByPk(decode.id)
+        if (user) return res.json(user)     
+    } catch (error) {
+        console.log(error);
+        res.status(404).json("Token erroneo")
+
+    }
+    
+
 }

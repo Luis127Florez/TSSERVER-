@@ -24,7 +24,6 @@ const verificarToken = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         req.body.userid = decode.id;
         const { userid } = req.body;
         const user1 = yield UserModel_1.default.findByPk(userid);
-        console.log(user1.rol);
         if (!user1)
             return res.status(404).json("Not user found");
         console.log(userid);
@@ -48,7 +47,7 @@ const verificarTokenADMiN = (req, res, next) => __awaiter(void 0, void 0, void 0
         const user1 = yield UserModel_1.default.findByPk(userid);
         if (!user1)
             return res.status(404).json("Not user found");
-        if (user1.rol !== "ADMIN")
+        if (user1.dataValues.rol !== "ADMIN")
             return res.status(404).json("user is not ADMIN");
         next();
     }

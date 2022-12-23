@@ -13,7 +13,7 @@ export const GetIndex = async (req: Request, res: Response) => {
                 msg: 'No exite un usuario con el id ingresado'
             })
         }
-        const data = await GetBuckets(usuario.img);
+        const data = await GetBuckets(usuario.dataValues.img);
 
         res.json({"link": data})
         
@@ -58,7 +58,7 @@ export const DeleteIndex = async(req: Request , res:Response  ) =>{
         const { id } = req.params;
         const usuario =  await users.findByPk(id);
         if(!usuario) return res.status(404).json("No se encontro un usuario con ese id")
-        DeleteArchivo(usuario.img);
+        DeleteArchivo(usuario.dataValues.img);
         await usuario.update({"img": ``});
         res.json(usuario)
         

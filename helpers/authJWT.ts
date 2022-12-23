@@ -11,10 +11,9 @@ export const verificarToken = async(req: Request, res:Response, next:NextFunctio
         if(!token)return res.status(403).json("token null")
 
         const decode = Jwt.verify(token, "milinode")
-        req.body.userid = decode.id 
-        const {userid}= req.body 
-        const user1 = await users.findByPk(userid)
-        console.log(user1.rol)
+        req.body.userid = decode.id; 
+        const {userid}= req.body; 
+        const user1 = await users.findByPk(userid);
 
         if (!user1)return res.status(404).json("Not user found")
 
@@ -44,7 +43,7 @@ export const verificarTokenADMiN = async(req: Request, res:Response, next:NextFu
         const user1 = await users.findByPk(userid)
         
         if (!user1)return res.status(404).json("Not user found")
-        if (user1.rol !== "ADMIN") return res.status(404).json("user is not ADMIN")
+        if (user1.dataValues.rol !== "ADMIN") return res.status(404).json("user is not ADMIN")
 
         next();
     } catch (error) {
