@@ -29,7 +29,7 @@ export const PahtUserByEmail = async(req : Request , res: Response)=>{
             } 
         })
         if (user) {
-            if (user.Contraseña !== body.Contraseña) return res.json(["pass not found"]);
+            if (user.Contraseña !== body.Contraseña) return res.json(null);
 
              const token =  jwt.sign({
                 id: user.idUser
