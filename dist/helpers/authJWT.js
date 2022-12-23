@@ -42,6 +42,7 @@ const verificarTokenADMiN = (req, res, next) => __awaiter(void 0, void 0, void 0
         if (!token)
             return res.status(403).json("token null");
         const decode = jsonwebtoken_1.default.verify(token, "milinode");
+        console.log(decode);
         req.body.userid = decode.id;
         const { userid } = req.body;
         const user1 = yield UserModel_1.default.findByPk(userid);

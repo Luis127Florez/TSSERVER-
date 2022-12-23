@@ -37,6 +37,7 @@ export const verificarTokenADMiN = async(req: Request, res:Response, next:NextFu
         if(!token)return res.status(403).json("token null")
 
         const decode = Jwt.verify(token, "milinode")
+        console.log(decode)
         req.body.userid = decode.id 
         const {userid}= req.body 
         const user1 = await users.findByPk(userid)

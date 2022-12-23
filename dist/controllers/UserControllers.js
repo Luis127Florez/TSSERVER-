@@ -43,7 +43,7 @@ const PahtUserByEmail = (req, res) => __awaiter(void 0, void 0, void 0, function
         });
         if (user) {
             if (user.Contraseña !== body.Contraseña)
-                return res.json(["pass not found"]);
+                return res.json(null);
             const token = jsonwebtoken_1.default.sign({
                 id: user.idUser
             }, 'milinode', { expiresIn: 86400 });
@@ -54,7 +54,7 @@ const PahtUserByEmail = (req, res) => __awaiter(void 0, void 0, void 0, function
             });
         }
         else {
-            return res.json([user]);
+            return res.json(user);
         }
     }
     catch (error) {
