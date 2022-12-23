@@ -17,7 +17,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const UserModel_1 = __importDefault(require("../model/UserModel"));
 const verificarToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { token } = req.body;
+        const { token } = req.headers;
         if (!token)
             return res.status(403).json("token null");
         const decode = jsonwebtoken_1.default.verify(token, "milinode");
@@ -38,7 +38,7 @@ const verificarToken = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
 exports.verificarToken = verificarToken;
 const verificarTokenADMiN = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { token } = req.body;
+        const { token } = req.headers;
         if (!token)
             return res.status(403).json("token null");
         const decode = jsonwebtoken_1.default.verify(token, "milinode");

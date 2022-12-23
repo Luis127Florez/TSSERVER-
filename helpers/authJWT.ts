@@ -5,8 +5,9 @@ import users from "../model/UserModel";
 
 export const verificarToken = async(req: Request, res:Response, next:NextFunction)=>{
     try {
-        const {token} = req.body
 
+        const {token}:any = req.headers
+        
         if(!token)return res.status(403).json("token null")
 
         const decode = Jwt.verify(token, "milinode")
@@ -17,7 +18,7 @@ export const verificarToken = async(req: Request, res:Response, next:NextFunctio
 
         if (!user1)return res.status(404).json("Not user found")
 
-        console.log(userid); 
+        console.log(userid);  
 
         next();
         
@@ -32,7 +33,7 @@ export const verificarToken = async(req: Request, res:Response, next:NextFunctio
 
 export const verificarTokenADMiN = async(req: Request, res:Response, next:NextFunction)=>{
     try {
-        const {token} = req.body
+        const {token}:any = req.headers
 
         if(!token)return res.status(403).json("token null")
 
