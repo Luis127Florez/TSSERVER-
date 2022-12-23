@@ -42,7 +42,7 @@ export const PahtUserByEmail = async(req : Request , res: Response)=>{
             })
             
         }else{
-            return res.json([user])
+            return res.json(user)
         }
         
     } catch (error) {
