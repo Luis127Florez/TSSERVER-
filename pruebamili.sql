@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-12-2022 a las 21:57:26
+-- Tiempo de generación: 23-12-2022 a las 23:16:22
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -79,7 +79,7 @@ CREATE TABLE `users` (
   `Telefono` int(11) DEFAULT NULL,
   `Edad` int(11) DEFAULT NULL,
   `sexo` varchar(45) DEFAULT NULL,
-  `Contraseña` varchar(45) DEFAULT NULL,
+  `Contraseña` varchar(100) DEFAULT NULL,
   `rol` varchar(45) DEFAULT NULL,
   `TipoDocumento` varchar(45) DEFAULT NULL,
   `img` varchar(300) DEFAULT NULL
@@ -90,11 +90,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`idUser`, `nombre`, `email`, `estado`, `createdAt`, `updatedAt`, `Apellidos`, `NumCedula`, `Telefono`, `Edad`, `sexo`, `Contraseña`, `rol`, `TipoDocumento`, `img`) VALUES
-(2, 'pedro', 'pero@gmail.con', 1, '0000-00-00 00:00:00', '2022-12-20 15:30:19', 'garcia', 100241855, 2147483647, 31, 'm', 'pedo2456', 'ADMIN', NULL, 'https://escuelitaet.s3.amazonaws.com/problema%20de%20xampp.png?AWSAccessKeyId=AKIAV3YUWFPITGHDBK63&Expires=1671566954&Signature=wj4QmF%2F4NLR%2FQB%2F%2FawHJOLA%2FkfU%3D'),
-(3, 'fede', 'fede@gmail.com', 0, '0000-00-00 00:00:00', '2022-12-20 20:23:19', 'lobos', 100256545, 32115254, 20, 'm', 'fede6354', 'EMPLOYE', NULL, 'https://escuelitaet.s3.amazonaws.com/maqueta.png?AWSAccessKeyId=AKIAV3YUWFPITGHDBK63&Expires=1671568699&Signature=27BZCJ2FkEdLENacrnIjHcNA7OM%3D'),
+(2, 'pedro', 'pero@gmail.con', 1, '0000-00-00 00:00:00', '2022-12-21 22:37:43', 'garcia', 100241855, 2147483647, 31, 'm', 'pedo2456', 'ADMIN', NULL, ''),
+(3, 'fede', 'fede@gmail.com', 0, '0000-00-00 00:00:00', '2022-12-20 22:23:20', 'lobos', 100256545, 32115254, 20, 'm', 'fede6354', 'EMPLOYE', NULL, 'PROYECTO INTEGRADOR.png'),
 (6, 'juan', 'juan@gmail.com', 1, '2022-12-14 15:32:52', '2022-12-14 15:32:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, 'melanie', 'melany@gmail.com', 0, '2022-12-14 15:37:04', '2022-12-20 20:37:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'https://btfundacionet.s3.amazonaws.com/imangen%20de%20prueba.png?AWSAccessKeyId=AKIAYOOQNH4RN2NZVFK2&Expires=1671569579&Signature=9v7Cn0AjiXqdPU2JYMcC5k%2BswDo%3D'),
-(9, 'morris', 'MORRIS@gmail.com', 1, '2022-12-17 15:36:13', '2022-12-17 15:36:13', 'alfred', 1224545, 302454145, 20, 'f', '123445', 'EMPLOYE', 'cc', NULL);
+(7, 'melanie', 'melany@gmail.com', 0, '2022-12-14 15:37:04', '2022-12-20 22:06:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'imangen de prueba.png'),
+(9, 'morris', 'MORRIS@gmail.com', 1, '2022-12-17 15:36:13', '2022-12-17 15:36:13', 'alfred', 1224545, 302454145, 20, 'f', '123445', 'EMPLOYE', 'cc', NULL),
+(10, 'luis', 'luisosda@gmail.con', 1, '2022-12-22 14:56:16', '2022-12-22 14:56:16', 'garcia', 252415, 2147483647, 31, 'm', 'LUIS2456', 'EMPLOYE', 'cc', ''),
+(11, 'loraine', 'loraine@gmail.con', 1, '2022-12-22 15:22:03', '2022-12-22 15:22:03', 'florez', 4541585, 2147483647, 31, 'm', 'LORI2456', 'EMPLOYE', 'cc', ''),
+(14, 'alfredo', 'alfre@gmail.con', 1, '2022-12-23 21:16:53', '2022-12-23 21:16:53', 'resdes', 1002145564, 302154552, 31, 'm', '$2a$10$yC1n/j..QIHgHIag8Vrg5./HlXSHsmE5DDx56GeJnaNo.pLsDzNpe', 'EMPLOYE', 'cc', '');
 
 --
 -- Índices para tablas volcadas
@@ -129,7 +132,7 @@ ALTER TABLE `solicitudes`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas

@@ -137,7 +137,7 @@ const DeleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.DeleteUser = DeleteUser;
 const PatchMyself = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { token } = req.body;
+        const { token } = req.headers;
         const decode = jsonwebtoken_1.default.verify(token, "milinode");
         const user = yield UserModel_1.default.findByPk(decode.id);
         if (user)

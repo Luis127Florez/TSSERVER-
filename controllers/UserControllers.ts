@@ -137,7 +137,7 @@ export const DeleteUser = async(req: Request, res: Response) => {
 }
 export const PatchMyself =  async ( req:Request , res:Response) =>{
     try {
-        const { token } = req.body
+        const { token }: any = req.headers
         const decode = jwt.verify(token, "milinode")
         const user = await users.findByPk(decode.id)
         if (user) return res.json(user)     
