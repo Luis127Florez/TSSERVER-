@@ -9,7 +9,7 @@ router.patch('/myself', verificarToken, PatchMyself )
 router.get('/:id',verificarTokenADMiN, GetUserById);
 router.patch('/', PahtUserByEmail);
 router.post('/', PostUser);
-router.put('/:id', verificarTokenADMiN, PutUser);
+router.put('/:id', verificarToken, PutUser);
 router.delete('/:id', verificarTokenADMiN, DeleteUser);
 
 export default router;
