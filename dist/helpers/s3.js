@@ -26,7 +26,7 @@ const almacen = new s3_1.default({
     secretAccessKey,
 });
 const GetBuckets = (filename) => {
-    return almacen.getSignedUrl('getObject', { Bucket: "escuelitaet", Key: filename });
+    return almacen.getSignedUrl('getObject', { Bucket: "btfundacionet", Key: filename });
 };
 exports.GetBuckets = GetBuckets;
 const Postarchivo = (Bucketsname, file) => __awaiter(void 0, void 0, void 0, function* () {
@@ -47,7 +47,7 @@ const Postarchivo = (Bucketsname, file) => __awaiter(void 0, void 0, void 0, fun
 exports.Postarchivo = Postarchivo;
 const DeleteArchivo = (file) => {
     var params = {
-        Bucket: "escuelitaet",
+        Bucket: "btfundacionet",
         Key: file
     };
     almacen.deleteObject(params, function (err, data) {

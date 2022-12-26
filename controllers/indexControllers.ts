@@ -29,7 +29,7 @@ export const PostIndex = async (req: Request, res: Response) => {
 
     try {
         if (!req.files) return res.status(400).json({ msg: "No Hubo archivo seleccionado" })
-        const Bucket = "escuelitaet"
+        const Bucket = "btfundacionet"
         const file = req.files.file
         const { id } = req.params
     

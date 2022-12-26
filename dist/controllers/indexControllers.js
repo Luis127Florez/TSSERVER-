@@ -37,7 +37,7 @@ const PostIndex = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (!req.files)
             return res.status(400).json({ msg: "No Hubo archivo seleccionado" });
-        const Bucket = "escuelitaet";
+        const Bucket = "btfundacionet";
         const file = req.files.file;
         const { id } = req.params;
         const result = yield (0, s3_1.Postarchivo)(Bucket, file);

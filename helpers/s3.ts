@@ -14,7 +14,7 @@ const almacen = new s3({
 });
 
 export const GetBuckets = (filename : string) => {
-    return almacen.getSignedUrl('getObject', { Bucket: "escuelitaet", Key: filename });
+    return almacen.getSignedUrl('getObject', { Bucket: "btfundacionet", Key: filename });
 };
 
 export const Postarchivo = async (Bucketsname: any, file: any) => {
@@ -36,7 +36,7 @@ export const Postarchivo = async (Bucketsname: any, file: any) => {
 
 export const DeleteArchivo =(file: string)=>{
     var params = {
-        Bucket: "escuelitaet", 
+        Bucket: "btfundacionet", 
         Key: file
        };
        almacen.deleteObject(params, function(err, data) {
