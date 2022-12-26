@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import users from "../model/UserModel";
 import { Postarchivo, GetBuckets , DeleteArchivo} from "../helpers/s3";
+import { Imgname } from "../helpers/types";
 
 export const GetIndex = async (req: Request, res: Response) => {
     try {
@@ -38,9 +39,10 @@ export const PostIndex = async (req: Request, res: Response) => {
         const usuario =  await users.findByPk(id)
     
         if(!usuario) return res.status(404).json("No se encontro un usuario con ese id")
-        const fileName = req.files.file.name
-    
-        await usuario.update({"img": `${fileName}`});
+        
+        const {name} = req.files.file as Imgname
+
+        await usuario.update({"img": `${name}`});
     
         res.json(result)
         

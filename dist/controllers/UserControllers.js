@@ -139,7 +139,8 @@ const PatchMyself = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     try {
         const { token } = req.headers;
         const decode = jsonwebtoken_1.default.verify(token, "milinode");
-        const user = yield UserModel_1.default.findByPk(decode.id);
+        const { id } = decode;
+        const user = yield UserModel_1.default.findByPk(id);
         if (user)
             return res.json(user);
     }

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import users from "../model/UserModel";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { JwtPayload } from "../helpers/types";
 
 
 export const GetUser = async (req: Request, res: Response) => {
@@ -139,7 +140,8 @@ export const PatchMyself =  async ( req:Request , res:Response) =>{
     try {
         const { token }: any = req.headers
         const decode = jwt.verify(token, "milinode")
-        const user = await users.findByPk(decode.id)
+        const { id } = decode as  JwtPayload 
+        const user = await users.findByPk(id)
         if (user) return res.json(user)     
     } catch (error) {
         console.log(error);

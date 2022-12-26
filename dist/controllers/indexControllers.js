@@ -44,8 +44,8 @@ const PostIndex = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const usuario = yield UserModel_1.default.findByPk(id);
         if (!usuario)
             return res.status(404).json("No se encontro un usuario con ese id");
-        const fileName = req.files.file.name;
-        yield usuario.update({ "img": `${fileName}` });
+        const { name } = req.files.file;
+        yield usuario.update({ "img": `${name}` });
         res.json(result);
     }
     catch (error) {
