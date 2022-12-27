@@ -46,7 +46,7 @@ const PahtUserByEmail = (req, res) => __awaiter(void 0, void 0, void 0, function
             const hash = user.dataValues.Contraseña;
             const passchek = bcryptjs_1.default.compareSync(`${body.Contraseña}`, hash);
             if (!passchek)
-                return res.json("pass NOT iguales");
+                return res.json(null);
             const token = jsonwebtoken_1.default.sign({
                 id: user.dataValues.idUser
             }, 'milinode', { expiresIn: 86400 });

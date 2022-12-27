@@ -36,7 +36,7 @@ export const PahtUserByEmail = async(req : Request , res: Response)=>{
             const passchek = bcrypt.compareSync(`${body.Contraseña}` , hash );
             
 
-            if (!passchek) return res.json("pass NOT iguales");
+            if (!passchek) return res.json(null);
              const token =  jwt.sign({
                 id: user.dataValues.idUser
               }, 'milinode', { expiresIn: 86400 });
