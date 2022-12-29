@@ -24,6 +24,8 @@ const GetIndex = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 msg: 'No exite un usuario con el id ingresado'
             });
         }
+        if (!usuario.dataValues.img)
+            return res.json(null);
         const data = yield (0, s3_1.GetBuckets)(usuario.dataValues.img);
         res.json({ "link": data });
     }
